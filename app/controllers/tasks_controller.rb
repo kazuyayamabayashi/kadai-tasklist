@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+   @task = Task.find(params[:id])
   end
 
   def update
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
 
     if @task.update(task_params)
       flash[:success] = 'Taskが追加されました'
-      redirect_to @message
+      redirect_to @task
     else
       flash.now[:danger] = 'Taskが追加されませんでした'
       render :edit
@@ -44,11 +44,12 @@ class TasksController < ApplicationController
     @task.destroy
     
     flash[:success] = 'Taskは削除されました'
-    redirect_to task_url
+    redirect_to tasks_url
   end
   
   # Strong Parameter
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content,)
   end
+  
 end
